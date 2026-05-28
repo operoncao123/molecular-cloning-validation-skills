@@ -280,7 +280,11 @@ def find_snapgene_cli(user_value: str) -> Optional[str]:
         return user_value
     candidates = [
         shutil.which("SnapGene"),
+        shutil.which("SnapGene.exe"),
         "/Applications/SnapGene.app/Contents/MacOS/SnapGene",
+        "C:/Program Files/SnapGene/SnapGene.exe",
+        "C:/Program Files (x86)/SnapGene/SnapGene.exe",
+        "/opt/SnapGene/SnapGene",
     ]
     return next((c for c in candidates if c and Path(c).exists()), None)
 

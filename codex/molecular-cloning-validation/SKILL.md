@@ -38,10 +38,10 @@ python scripts/cloning_validation_pipeline.py \
   --dna-column DNA_final \
   --name-map A:targetA,B:targetB \
   --vector recipient_vector.dna \
-  --left-anchor AACCGGTTCTAGAGCGCTATCGATGCCACCATG \
-  --right-anchor GGGGGGTGGCGGGTCC \
-  --left-overlap-seq AACCGGTTCTAGAGCGCTATCGATGCCACC \
-  --right-overlap-seq GGGGGTGGCGGGTCC \
+  --left-anchor LEFT_VECTOR_BOUNDARY_SEQUENCE \
+  --right-anchor RIGHT_VECTOR_BOUNDARY_SEQUENCE \
+  --left-overlap-seq INSERT_5P_OVERLAP_SEQUENCE \
+  --right-overlap-seq INSERT_3P_OVERLAP_SEQUENCE \
   --second-feature-name "fixed module" \
   --sanger-success-dir sanger/success \
   --sanger-failed-dir sanger/failed \
@@ -49,6 +49,8 @@ python scripts/cloning_validation_pipeline.py \
 ```
 
 Use `--replace-start` and `--replace-end` instead of anchors when the exact replacement coordinates are known.
+
+The anchor and overlap values are normal project-specific inputs. They must be inferred from the user's vector and insert design; do not reuse example sequences from another project.
 
 ## Output Structure
 
@@ -85,4 +87,4 @@ Use existing project environments when possible. Typical Python dependencies:
 pip install pandas openpyxl biopython snapgene-reader
 ```
 
-Native `.dna` conversion requires SnapGene CLI, commonly `/Applications/SnapGene.app/Contents/MacOS/SnapGene` on macOS.
+Native `.dna` conversion requires SnapGene CLI. Common paths are `/Applications/SnapGene.app/Contents/MacOS/SnapGene` on macOS and `C:\Program Files\SnapGene\SnapGene.exe` on Windows. CLI flags are generally the same; shell quoting and executable paths differ.

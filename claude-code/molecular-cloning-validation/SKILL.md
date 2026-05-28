@@ -43,10 +43,10 @@ python scripts/cloning_validation_pipeline.py \
   --dna-column DNA_final \
   --name-map A:targetA,B:targetB \
   --vector vector.dna \
-  --left-anchor AACCGGTTCTAGAGCGCTATCGATGCCACCATG \
-  --right-anchor GGGGGGTGGCGGGTCC \
-  --left-overlap-seq AACCGGTTCTAGAGCGCTATCGATGCCACC \
-  --right-overlap-seq GGGGGTGGCGGGTCC \
+  --left-anchor LEFT_VECTOR_BOUNDARY_SEQUENCE \
+  --right-anchor RIGHT_VECTOR_BOUNDARY_SEQUENCE \
+  --left-overlap-seq INSERT_5P_OVERLAP_SEQUENCE \
+  --right-overlap-seq INSERT_3P_OVERLAP_SEQUENCE \
   --second-feature-name "fixed module" \
   --sanger-success-dir sanger/报告成功 \
   --sanger-failed-dir sanger/报告失败 \
@@ -56,10 +56,12 @@ python scripts/cloning_validation_pipeline.py \
 If coordinates are known, replace the anchors with:
 
 ```bash
---replace-start 7252 --replace-end 7551
+--replace-start START_POS --replace-end END_POS
 ```
 
 Use `--skip-snapgene` when SnapGene CLI is not available; GenBank outputs and Sanger reports still work.
+
+The anchor and overlap values are project-specific. Infer them from the user's vector and synthesized insert design for each project.
 
 ## Outputs To Produce
 
@@ -101,3 +103,11 @@ SnapGene native `.dna` conversion requires a local SnapGene installation. On mac
 ```bash
 /Applications/SnapGene.app/Contents/MacOS/SnapGene
 ```
+
+On Windows the CLI is often:
+
+```powershell
+C:\Program Files\SnapGene\SnapGene.exe
+```
+
+The SnapGene CLI options are generally the same across macOS and Windows; executable paths and shell quoting differ.
